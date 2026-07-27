@@ -1,12 +1,7 @@
-import { connectSocket } from "./network.js";
 import { showLogin } from "./ui/screens.js";
+import { connectSocket } from "./network.js";
 
-console.log("main.js loaded");
-
-document.addEventListener("DOMContentLoaded", ()=>{
-    showLogin();
-});
-
+console.log(document.getElementById("loginScreen"));
 
 connectSocket();
 
