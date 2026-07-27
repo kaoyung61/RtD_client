@@ -1,3 +1,13 @@
+export function showLogin(){
+    document.getElementById("loginScreen").innerHTML = `
+        <input id="name">
+        <button id="login">Login</button>
+    `;
+}
+
+
+/*
+
 const button = document.getElementById("send");
 
 button.onclick = async () => {
@@ -22,3 +32,4 @@ button.onclick = async () => {
     document.getElementById("answer").innerText = data.result;
 
 };
+*/
