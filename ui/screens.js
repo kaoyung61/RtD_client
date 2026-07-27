@@ -1,5 +1,6 @@
 export function showLogin(){
-
+    console.log( document.getElementById("loginScreen"));
+    console.log("showLogin called");
     document.getElementById("loginScreen").innerHTML = `
         <h1>Login</h1>
         <button id="login">
