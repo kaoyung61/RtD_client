@@ -1,6 +1,6 @@
 export function showLogin(){
 
-    document.getElementById("app").innerHTML = `
+    document.getElementById("loginScreen").innerHTML = `
         <h1>Login</h1>
         <button id="login">
             Login
