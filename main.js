@@ -1,8 +1,8 @@
-import { showLogin } from "./ui/screens.js";
+//import { showLogin } from "./ui/screens.js";
+import { startTest } from "./ui/testClient.js";
 import { connectSocket } from "./network.js";
-
-console.log(document.getElementById("loginScreen"));
 
 connectSocket();
 
-showLogin();
+//showLogin();
+startTest()
