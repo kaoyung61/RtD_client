@@ -37,15 +37,15 @@ export function createHTMLtest() {
         <br><br>
 
         <input id="number" placeholder="2">
-        <ul id="was">
-            <li>id</li>
-            <li>region</li>
-            <li>neighbors</li>
-            <li>bandits</li>
-            <li>boss</li>
-            <li>generals</li>
-            <li>border</li>
-        </ul>
+        <select id="was">
+            <option value="id">ID</option>
+            <option value="region">Region</option>
+            <option value="neighbors">Neighbors</option>
+            <option value="bandits">Bandits</option>
+            <option value="boss">Boss</option>
+            <option value="generals">Generals</option>
+            <option value="border">Border</option>
+        </select>
         <button id="send">Send</button>
 
         <hr>
