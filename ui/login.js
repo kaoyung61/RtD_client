@@ -1,7 +1,18 @@
 export function showLoginScreen(){
 
-    const loginScreen = document.getElementById("loginScreen");
+    const logoScreen = document.getElementById("logoScreen");
+    if(!logoScreen){
+        console.error("logoScreen not found");
+        return;
+    }
 
+    logoScreen.innerHTML = `
+		<img id="logo_img" src="img/logo.png" alt="Логотип">
+    `;
+
+
+
+    const loginScreen = document.getElementById("loginScreen");
     if(!loginScreen){
         console.error("loginScreen not found");
         return;

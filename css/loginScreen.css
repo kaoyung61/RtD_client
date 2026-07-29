@@ -3,8 +3,8 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%; 
-	/*background-image: url('img/background.png');*/
+  height: 100%;
+	background-image: url('img/background.png');
 	z-index: 99;
 
 }
@@ -14,7 +14,7 @@
   left: 5%;
   width: 90%;
   height: 100%; 
-	-webkit-transition: height 1s ease;
+  transition: height 1s ease;
   object-fit: contain; /* Убедитесь, что изображение полностью видно без обрезки */
 	z-index: 100;
 	filter: drop-shadow(0 0 20px var(--jbg-gold));
