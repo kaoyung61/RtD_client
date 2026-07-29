@@ -80,6 +80,14 @@ function receiveEvent(data) {
             }
             break;
         }
+        
+        case "terrInfo": {
+            const log = document.getElementById("log");
+            if (log) {
+                log.textContent += `${data.from}: ${data.text}\n`;
+            }
+            break;
+        }
         default:
             console.log("Server event:", data);
     }
