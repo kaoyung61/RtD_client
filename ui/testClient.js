@@ -16,9 +16,9 @@ function send_message() {
 
     console.log("send_message");
     sendSocket({
-        type: "message",
-        to: document.getElementById("to").value,
-        text: document.getElementById("text").value
+        type: "territoryInfo",
+        number: document.getElementById("number").value,
+        was: document.getElementById("was").value
     });
 }
 
@@ -36,8 +36,16 @@ export function createHTMLtest() {
 
         <br><br>
 
-        <input id="to" placeholder="Send to">
-        <input id="text" placeholder="Message">
+        <input id="number" placeholder="2">
+        <ul id="was">
+            <li>id</li>
+            <li>region</li>
+            <li>neighbors</li>
+            <li>bandits</li>
+            <li>boss</li>
+            <li>generals</li>
+            <li>border</li>
+        </ul>
         <button id="send">Send</button>
 
         <hr>
