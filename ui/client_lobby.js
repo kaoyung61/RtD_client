@@ -1,4 +1,4 @@
-export function showLoginScreen(){
+export function createLoginScreen(){
 
     const logoScreen = document.getElementById("logoScreen");
     if(!logoScreen){
@@ -25,4 +25,18 @@ export function showLoginScreen(){
 		<button type="button" id="login_button" class="button_0" onclick="window.loginBtn_click()">Sign In</button>
 		<button type="button" id="openRegister_button" class="button_0" onclick="window.openRegisterBtn_click()">I'm new hier. Register me</button>
     `;
+
+    const roomScreen = document.getElementById("roomScreen");
+    if(!roomScreen){
+        console.error("roomScreen not found");
+        return;
+    }
+
+    roomScreen.innerHTML = `
+		<div id="room_text">Please select a room</div>
+		<button type="button" id="create_room_button" class="button_0" onclick="window.createRoomBtn_click()">Create Room</button>
+		<button type="button" id="join_room_button" class="button_0" onclick="window.joinRoomBtn_click()">Join Room</button>
+    `;
+
+
 }

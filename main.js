@@ -1,5 +1,5 @@
 import { connectSocket } from "./network.js";
 connectSocket();
 
-import { showLoginScreen } from "./ui/login.js";
-showLoginScreen();
+import { createLoginScreen } from "./ui/client_lobby.js";
+createLoginScreen();
