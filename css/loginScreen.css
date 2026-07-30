@@ -1,3 +1,8 @@
+:root {
+	--jbg-gray: rgba(32,32,32,1);
+	--jbg-gold: rgba(202,194,136,1);
+}
+
 #gray_back{
   position: fixed;
   top: 0;
