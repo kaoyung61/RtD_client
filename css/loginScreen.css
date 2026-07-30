@@ -14,31 +14,175 @@
   left: 5%;
   width: 90%;
   height: 100%; 
-  transition: height 1s ease;
-  object-fit: contain; /* Убедитесь, что изображение полностью видно без обрезки */
-	z-index: 100;
-	filter: drop-shadow(0 0 20px var(--jbg-gold));
-}
-#loginScreen {
-  position: fixed;
-  top: 30%;
-  left: 5%;
-  width: 90%;
-  height: 30%; 
-  transition: height 1s ease;
+	-webkit-transition: height 1s ease;
   object-fit: contain; /* Убедитесь, что изображение полностью видно без обрезки */
 	z-index: 100;
 	filter: drop-shadow(0 0 20px var(--jbg-gold));
 }
 
-#roomScreen {
-  position: fixed;
-  top: 100%;
-  left: 5%;
-  width: 90%;
-  height: 0%; 
-  transition: height 1s ease;
-  object-fit: contain; /* Убедитесь, что изображение полностью видно без обрезки */
+#GameRooms-container {
+	position: fixed;
+	width: 100%;
+	height: 0%;
+	bottom:0px;
 	z-index: 100;
-	filter: drop-shadow(0 0 20px var(--jbg-gold));
+	-webkit-transition: height 1s ease;
+}
+#GameRooms-table-container {
+    position: relative;
+    top: 0;
+    left: 5%;
+    width: 90%;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 1);
+    z-index: 101;
+    overflow: auto; /* Добавляет прокрутку при переполнении */
+    border: none; /* Граница вокруг всей таблицы */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #aaa; /* Границы ячеек */
+    padding: 8px; /* Поддержите отступы */
+    text-align: center; /* Центрирование текста в заголовках и ячейках */
+}
+
+th {
+		border: 1px solid #333; /* Границы ячеек */
+    position: sticky; /* Закрепляем заголовки */
+    top: 0; /* Устанавливаем положение заголовков при прокрутке */
+    background-color: #f1f1f1; /* Цвет фона для заголовков */
+    z-index: 1; /* Обеспечиваем, чтобы заголовки были выше содержимого */
+}
+
+th img {
+    vertical-align: middle; /* Выравнивание изображения по вертикали */
+}
+
+td img {
+    vertical-align: middle; /* Выравнивание изображения по вертикали */
+}
+tr {
+    height: 40px; /* Установите желаемую высоту */
+}
+
+tr:hover {
+    cursor: pointer; /* Указатель при наведении на строку */
+}
+
+.selected {
+    background-color: rgba(168, 168, 168, 1); /* Серый цвет для выделенной строки */
+}
+
+
+#GameRooms-connectButton {
+	position: absolute;
+	width: 90%;
+	height: 10%;
+	bottom: 7.5%;
+	left: 5%;
+	background-color: transparent; 
+	border: none;
+	color: rgba(255, 255, 255, 1); /* Белый цвет текста */
+	font-weight: bold; /* Жирный текст */
+	font-size: 22px; /* Увеличение размера текста */
+}
+
+
+/* Общий стиль для модального окна */
+#loginModal {
+    position: fixed; 
+    z-index: 101; /* Высокий z-index для отображения поверх других элементов */
+    left: 0%;
+    bottom: 0%;
+    width: 100%;
+    height: 0%;
+		transition: height 1s ease;
+    background-color: transparent;
+    display: flex; /* Используем flexbox для центрирования содержимого */
+    align-items: center;
+    justify-content: center;
+		
+}
+/* Стиль для заголовка */
+#login_text{
+	position:absolute;
+	color: #ffffff; /* Цвет текста */
+	top:0%;
+	left:5%;
+	width:90%;
+	height:10%;
+	text-align: center;
+	justify-content: center; /* Горизонтальное выравнивание */
+  align-items: center; /* Вертикальное выравнивание */
+	font-size: 24px; /* Размер шрифта */
+}
+
+
+
+/* Стиль для полей ввода */
+.login_input {
+	position:absolute;
+	width:90%;
+	height:20%;
+	left:5%;
+	margin: 0;
+  padding: 0;
+	border: 1px solid #ddd; /* Светлая рамка */
+	font-size: 20px; /* Размер шрифта */
+	outline: none; /* Убираем стандартную обводку */
+	/*transition: border-color 0.3s, background-color 0.3s;  Плавный переход */
+	text-align: center;
+}
+.login_input:focus {
+    border-color: #007bff; /* Цвет рамки при фокусе */
+    background-color: #f0f8ff; /* Светлый фон при фокусе */
+}
+
+
+#login_input{
+	top: 15%;
+}
+#password_input{
+	top: 40%;
+}
+
+/* Стиль для кнопки входа */
+#login_button {
+	position:absolute;
+	background-color: transparent;
+	color: #ffffff; /* Цвет текста */
+	border: none;
+	font-size: 22px; /* Размер шрифта */
+	cursor: pointer; /* Курсор при наведении */
+	transition: background-color 0.3s; /* Плавный переход */
+	top: 65%;
+	width:90%;
+	height:20%;
+	left:5%;
+		
+}
+
+#openRegister_button {
+	position:absolute;
+	background-color: transparent;
+	color: #ffffff; /* Цвет текста */
+	border: none;
+	font-size: 16px; /* Размер шрифта */
+	cursor: pointer; /* Курсор при наведении */
+	transition: background-color 0.3s; /* Плавный переход */
+	top: 85%;
+	width:90%;
+	height:10%;
+	left:5%;
+		
+}
+
+
+#login_button:hover {
+    background-color: rgba(100,100,100,1); /* Темнее при наведении */
 }
