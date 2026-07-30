@@ -19,12 +19,24 @@
 	z-index: 100;
 	filter: drop-shadow(0 0 20px var(--jbg-gold));
 }
-#roomScreen {
+#loginScreen {
   position: fixed;
   top: 30%;
   left: 5%;
   width: 90%;
   height: 30%; 
+  transition: height 1s ease;
+  object-fit: contain; /* Убедитесь, что изображение полностью видно без обрезки */
+	z-index: 100;
+	filter: drop-shadow(0 0 20px var(--jbg-gold));
+}
+
+#roomScreen {
+  position: fixed;
+  top: 100%;
+  left: 5%;
+  width: 90%;
+  height: 0%; 
   transition: height 1s ease;
   object-fit: contain; /* Убедитесь, что изображение полностью видно без обрезки */
 	z-index: 100;

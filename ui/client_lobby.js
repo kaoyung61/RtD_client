@@ -9,7 +9,7 @@ export function createLoginScreen(){
     logoScreen.innerHTML = `
 		<img id="logo_img" src="img/logo.png" alt="Логотип">
     `;
-    document.getElementById("loginScreen").style.height = "50%";
+    document.getElementById("logoScreen").style.height = "50%";
 
 
     const loginScreen = document.getElementById("loginScreen");
