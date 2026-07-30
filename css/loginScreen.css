@@ -13,7 +13,7 @@
   top: 0;
   left: 5%;
   width: 90%;
-  height: 30%; 
+  height: 100%; 
   transition: height 1s ease;
   object-fit: contain; /* Убедитесь, что изображение полностью видно без обрезки */
 	z-index: 100;
