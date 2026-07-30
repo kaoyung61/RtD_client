@@ -9,7 +9,8 @@ export function createLoginScreen(){
     logoScreen.innerHTML = `
 		<img id="logo_img" src="img/logo.png" alt="Логотип">
     `;
-    document.getElementById("logoScreen").style.height = "50%";
+    console.log("logoScreen created");
+    document.getElementById("logo_img").style.height = "50%";
 
 
     const loginScreen = document.getElementById("loginScreen");
@@ -34,6 +35,7 @@ export function createLoginScreen(){
 
     roomScreen.innerHTML = `
 		<div id="room_text">Please select a room</div>
+
 		<button type="button" id="create_room_button" class="button_0" onclick="window.createRoomBtn_click()">Create Room</button>
 		<button type="button" id="join_room_button" class="button_0" onclick="window.joinRoomBtn_click()">Join Room</button>
     `;
