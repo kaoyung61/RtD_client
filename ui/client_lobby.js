@@ -46,3 +46,10 @@ export function createStartScreen(){
 
 
 }
+
+export function showLoginScreen(){
+
+document.getElementById("logo_img").style.height = "50%";
+
+
+}
