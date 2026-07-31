@@ -3,6 +3,7 @@ let playerLogin = null;
 let playerPassword = null;
 
 
+console.log("version 23");
 
 import { connectSocket } from "./network.js";
 connectSocket();
