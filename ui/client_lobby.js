@@ -62,25 +62,24 @@ export function showLoginScreen(){
 }
 
 function loginBtn_click(){
-    playerLogin=document.getElementById("login_input").value;
-    playerPassword=document.getElementById("password_input").value;
-    sendData={
-        login: playerLogin,
-        password: playerPassword
-    };
-    localStorage.setItem("playerLogin", sendData);
-    sendtoServer("login", sendData);
 
+    let dataToSend = {
+        login: document.getElementById("login_input").value,
+        password: document.getElementById("password_input").value
+    };
+
+    localStorage.setItem("playerLogin", JSON.stringify(dataToSend));
+
+    sendtoServer("login", dataToSend);
 }
 
 function openRegisterBtn_click(){
-    playerLogin=document.getElementById("login_input").value;
-    playerPassword=document.getElementById("password_input").value;
-    sendData={
-        login: playerLogin,
-        password: playerPassword
+    let dataToSend = {
+        login: document.getElementById("login_input").value,
+        password: document.getElementById("password_input").value
     };
-    localStorage.setItem("playerLogin", sendData);
+
+    localStorage.setItem("playerLogin", JSON.stringify(dataToSend));
     sendtoServer("newRegister", sendData);
 
 }
