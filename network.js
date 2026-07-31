@@ -87,7 +87,7 @@ function receiveEvent(data) {
 }
 
 
-function sendtoServer(command, data = {}) {
+export function sendtoServer(command, data = {}) {
     if (!socket || socket.readyState !== WebSocket.OPEN) {
         console.warn("Socket not connected");
         return false;
