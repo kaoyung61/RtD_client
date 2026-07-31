@@ -12,12 +12,13 @@ export function createStartScreen(){
 		<div id="login_text">Please login</div>
 		<input type="text" id="login_input" class="login_input" placeholder="Login" required />
 		<input type="password" id="password_input" class="login_input" placeholder="Password" required />
-		<button type="button" id="login_button" class="button_0" onclick="loginBtn_click()">Sign In</button>
+		<button type="button" id="login_button" class="button_0"">Sign In</button>
 		<button type="button" id="openRegister_button" class="button_0" onclick="openRegisterBtn_click()">I'm new hier. Register me</button>
         </div>
     `;
     document.getElementById("loginModal").style.height = "0%";
-
+    document.getElementById("login_button").addEventListener("click", loginBtn_click);
+    document.getElementById("openRegister_button").addEventListener("click", openRegisterBtn_click);
 
     const roomScreen = document.getElementById("roomScreen");
     if(!roomScreen){
@@ -63,11 +64,11 @@ export function showLoginScreen(){
 function loginBtn_click(){
     playerLogin=document.getElementById("login_input").value;
     playerPassword=document.getElementById("password_input").value;
-
-
     sendData={
         login: playerLogin,
         password: playerPassword
     };
-    sendtoServer("login", sendData)
+    localStorage.setItem("playerLogin", sendData);
+    sendtoServer("login", sendData);
+
 }
