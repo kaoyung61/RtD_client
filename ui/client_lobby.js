@@ -1,4 +1,4 @@
-import { sendtoServer } from "./network.js";
+import { sendtoServer } from "/network.js";
 
 
 export function createStartScreen(){
