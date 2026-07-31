@@ -94,14 +94,21 @@ function receiveEvent(data) {
 }
 
 
-export function sendSocket(data) {
+function sendtoServer(command, data = {}) {
     if (!socket || socket.readyState !== WebSocket.OPEN) {
         console.warn("Socket not connected");
         return false;
     }
-    socket.send(JSON.stringify(data));
+
+    socket.send(JSON.stringify({
+        token: playerToken,
+        command,
+        data
+    }));
+
     return true;
 }
+
 
 export function isConnected() {
     return socket && socket.readyState === WebSocket.OPEN;
