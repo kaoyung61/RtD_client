@@ -122,3 +122,16 @@ window.addEventListener("online", () => {
 window.addEventListener("offline", () => {
     console.log("Connection lost");
 });
+
+
+function authoriseMe() {
+
+
+    let dataToSend = {
+            tockenToCheck: "testTockenToCheck",
+        };
+    
+        
+    
+        sendtoServer("authoriseMe", dataToSend);
+}

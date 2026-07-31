@@ -1,3 +1,9 @@
+let playerToken = null;
+let playerLogin = null;
+let playerPassword = null;
+
+
+
 import { connectSocket } from "./network.js";
 connectSocket();
 
