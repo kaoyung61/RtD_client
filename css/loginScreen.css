@@ -124,7 +124,7 @@ tr:hover {
 	text-align: center;
 	justify-content: center; /* Горизонтальное выравнивание */
   align-items: center; /* Вертикальное выравнивание */
-	font-size: 24px; /* Размер шрифта */
+	font-size: 48px; /* Размер шрифта */
 }
 
 
@@ -138,7 +138,7 @@ tr:hover {
 	margin: 0;
   padding: 0;
 	border: 1px solid #ddd; /* Светлая рамка */
-	font-size: 20px; /* Размер шрифта */
+	font-size: 48px; /* Размер шрифта */
 	outline: none; /* Убираем стандартную обводку */
 	/*transition: border-color 0.3s, background-color 0.3s;  Плавный переход */
 	text-align: center;
@@ -162,7 +162,7 @@ tr:hover {
 	background-color: transparent;
 	color: #ffffff; /* Цвет текста */
 	border: none;
-	font-size: 22px; /* Размер шрифта */
+	font-size: 48px; /* Размер шрифта */
 	cursor: pointer; /* Курсор при наведении */
 	transition: background-color 0.3s; /* Плавный переход */
 	top: 65%;
@@ -177,7 +177,7 @@ tr:hover {
 	background-color: transparent;
 	color: #ffffff; /* Цвет текста */
 	border: none;
-	font-size: 16px; /* Размер шрифта */
+	font-size: 48px; /* Размер шрифта */
 	cursor: pointer; /* Курсор при наведении */
 	transition: background-color 0.3s; /* Плавный переход */
 	top: 85%;
