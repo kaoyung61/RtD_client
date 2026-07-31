@@ -52,7 +52,7 @@ export function createStartScreen(){
 
 export function showLoginScreen(){
 
-    console.log("showLoginScreen called_23");
+    console.log("showLoginScreen called_32");
     document.getElementById("logo_img").style.height = "40%";
 
     document.getElementById("loginModal").style.height = "50%";
