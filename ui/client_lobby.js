@@ -72,3 +72,15 @@ function loginBtn_click(){
     sendtoServer("login", sendData);
 
 }
+
+function openRegisterBtn_click(){
+    playerLogin=document.getElementById("login_input").value;
+    playerPassword=document.getElementById("password_input").value;
+    sendData={
+        login: playerLogin,
+        password: playerPassword
+    };
+    localStorage.setItem("playerLogin", sendData);
+    sendtoServer("newRegister", sendData);
+
+}
