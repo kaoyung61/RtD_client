@@ -15,10 +15,10 @@
 }
 #logo_img {
   position: fixed;
-  top: 0;
+  top: 5%;
   left: 5%;
   width: 90%;
-  height: 100%; 
+  height: 90%; 
 	-webkit-transition: height 1s ease;
   object-fit: contain; /* Убедитесь, что изображение полностью видно без обрезки */
 	z-index: 100;
