@@ -72,8 +72,8 @@ function loginBtn_click(){
         password: document.getElementById("password_input").value
     };
 
-    localStorage.setItem("playerLogin", JSON.stringify(dataToSend));
-    localStorage.setItem("playerPassword", JSON.stringify(dataToSend));
+    localStorage.setItem("playerLogin", dataToSend.login);
+    localStorage.setItem("playerPassword", dataToSend.password);
 
     sendtoServer("loginClient", dataToSend);
 }
@@ -84,8 +84,9 @@ function openRegisterBtn_click(){
         password: document.getElementById("password_input").value
     };
 
-    localStorage.setItem("playerLogin", JSON.stringify(dataToSend));
-    localStorage.setItem("playerPassword", JSON.stringify(dataToSend));
+    localStorage.setItem("playerLogin", dataToSend.login);
+    localStorage.setItem("playerPassword", dataToSend.password);
+    
     sendtoServer("newClientRegistration", dataToSend);
 
 }
