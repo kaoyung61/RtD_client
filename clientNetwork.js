@@ -1,5 +1,9 @@
 import { SERVER_HTTP, SERVER_SOCKET } from "./clientConfig.js";
-import { playerToken, playerLogin, playerPassword } from "./clientMain.js";
+
+
+export let playerToken = localStorage.getItem("playerToken");
+export let playerLogin = localStorage.getItem("playerLogin");
+export let playerPassword = localStorage.getItem("playerPassword");
 
 
 let socket = null;
@@ -73,6 +77,7 @@ function receiveEvent(data) {
         case "tockenUpdate": {
             playerToken = data.token;
             localStorage.setItem("playerToken", playerToken);
+            
         }
         
         default:

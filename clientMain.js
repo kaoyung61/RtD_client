@@ -1,9 +1,8 @@
-export let playerToken = localStorage.getItem("playerToken");;
-export let playerLogin = localStorage.getItem("playerLogin");;
-export let playerPassword = localStorage.getItem("playerPassword");;
+import { playerToken, playerLogin, playerPassword } from "./clientNetwork.js";
 
 
-console.log("version 24");
+
+console.log("version 0801_5");
 
 
 
@@ -18,8 +17,6 @@ import {
 
 
 connectSocket();
-
-
 
 createStartScreen();
 
