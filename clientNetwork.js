@@ -8,6 +8,7 @@ export let playerPassword = localStorage.getItem("player") ? JSON.parse(localSto
 
 let socket = null;
 
+/*
 export async function sendRequest(command, data = {}) {
     const response = await fetch(SERVER_HTTP, {
         method: "POST",
@@ -21,6 +22,8 @@ export async function sendRequest(command, data = {}) {
     });
     return await response.json();
 }
+*/
+
 
 let reconnectTimer = null;
 
@@ -38,7 +41,7 @@ export function connectSocket() {
             reconnectTimer = null;
         }
 
-        sendtoServer("authoriseMe", { login: playerLogin, password: playerPassword});
+        //sendtoServer("authoriseMe", { login: playerLogin, password: playerPassword});
 
     };
 
