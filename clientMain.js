@@ -1,9 +1,9 @@
-export let playerToken = null;
-export let playerLogin = null;
-export let playerPassword = null;
+export let playerToken = localStorage.getItem("playerToken");;
+export let playerLogin = localStorage.getItem("playerLogin");;
+export let playerPassword = localStorage.getItem("playerPassword");;
 
 
-console.log("version 23");
+console.log("version 24");
 
 
 

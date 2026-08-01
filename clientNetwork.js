@@ -34,7 +34,7 @@ export function connectSocket() {
             reconnectTimer = null;
         }
 
-        authoriseMe();
+        sendtoServer("authoriseMe", { login: playerLogin, password: playerPassword, token: playerToken});
 
     };
 
@@ -70,13 +70,9 @@ function startReconnect() {
 
 function receiveEvent(data) {
     switch (data.type) {
-        case "message": {
-            alert("message");
-            const log = document.getElementById("log");
-            if (log) {
-                log.textContent += `${data.from}: ${data.text}\n`;
-            }
-            break;
+        case "tockenUpdate": {
+            playerToken = data.token;
+            localStorage.setItem("playerToken", playerToken);
         }
         
         default:
@@ -114,15 +110,3 @@ window.addEventListener("offline", () => {
     console.log("Connection lost");
 });
 
-
-function authoriseMe() {
-
-
-    let dataToSend = {
-            tockenToCheck: "testTockenToCheck",
-        };
-    
-        
-    
-        sendtoServer("authoriseMe", dataToSend);
-}

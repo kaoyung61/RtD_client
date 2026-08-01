@@ -64,6 +64,7 @@ export function showLoginScreen(){
 
 }
 
+
 function loginBtn_click(){
 
     let dataToSend = {
@@ -72,8 +73,9 @@ function loginBtn_click(){
     };
 
     localStorage.setItem("playerLogin", JSON.stringify(dataToSend));
+    localStorage.setItem("playerPassword", JSON.stringify(dataToSend));
 
-    sendtoServer("login", dataToSend);
+    sendtoServer("loginClient", dataToSend);
 }
 
 function openRegisterBtn_click(){
@@ -83,6 +85,7 @@ function openRegisterBtn_click(){
     };
 
     localStorage.setItem("playerLogin", JSON.stringify(dataToSend));
-    sendtoServer("newRegister", sendData);
+    localStorage.setItem("playerPassword", JSON.stringify(dataToSend));
+    sendtoServer("newClientRegistration", dataToSend);
 
 }
