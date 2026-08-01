@@ -1,4 +1,6 @@
-import { SERVER_HTTP, SERVER_SOCKET } from "./config.js";
+import { SERVER_HTTP, SERVER_SOCKET } from "./clientConfig.js";
+import { playerToken, playerLogin, playerPassword } from "./clientMain.js";
+
 
 let socket = null;
 
@@ -32,11 +34,7 @@ export function connectSocket() {
             reconnectTimer = null;
         }
 
-        // Авторизация после переподключения
-        sendSocket({
-             type: "login",
-             token: localStorage.getItem("token")
-         });
+        authoriseMe();
 
     };
 
