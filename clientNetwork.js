@@ -2,8 +2,8 @@ import { SERVER_HTTP, SERVER_SOCKET } from "./clientConfig.js";
 
 
 export let playerToken = localStorage.getItem("playerToken");
-export let playerLogin = localStorage.getItem("playerLogin");
-export let playerPassword = localStorage.getItem("playerPassword");
+export let playerLogin = localStorage.getItem("player") ? JSON.parse(localStorage.getItem("player")).login : null;
+export let playerPassword = localStorage.getItem("player") ? JSON.parse(localStorage.getItem("player")).password : null;
 
 
 let socket = null;
@@ -38,7 +38,7 @@ export function connectSocket() {
             reconnectTimer = null;
         }
 
-        sendtoServer("authoriseMe", { login: playerLogin, password: playerPassword, token: playerToken});
+        sendtoServer("authoriseMe", { login: playerLogin, password: playerPassword});
 
     };
 
@@ -74,11 +74,15 @@ function startReconnect() {
 
 function receiveEvent(data) {
     switch (data.type) {
-        case "tockenUpdate": {
-            playerToken = data.token;
-            localStorage.setItem("playerToken", playerToken);
-            
+        case "message": {
+            console.log("Server message:", data.text);
+            break;
         }
+        //case "tockenUpdate": {
+        //    playerToken = data.token;
+        //    localStorage.setItem("playerToken", playerToken);
+            
+        //}
         
         default:
             console.log("Server event:", data);

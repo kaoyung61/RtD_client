@@ -72,8 +72,7 @@ function loginBtn_click(){
         password: document.getElementById("password_input").value
     };
 
-    localStorage.setItem("playerLogin", dataToSend.login);
-    localStorage.setItem("playerPassword", dataToSend.password);
+    localStorage.setItem("player", JSON.stringify(dataToSend));
 
     sendtoServer("loginClient", dataToSend);
 }
@@ -84,9 +83,7 @@ function openRegisterBtn_click(){
         password: document.getElementById("password_input").value
     };
 
-    localStorage.setItem("playerLogin", dataToSend.login);
-    localStorage.setItem("playerPassword", dataToSend.password);
-    
+    localStorage.setItem("player", JSON.stringify(dataToSend));
     sendtoServer("newClientRegistration", dataToSend);
 
 }

@@ -1,7 +1,7 @@
 import { playerToken, playerLogin, playerPassword } from "./clientNetwork.js";
 
 
-console.log("version 0801_6");
+console.log("version 0801_7");
 
 
 
