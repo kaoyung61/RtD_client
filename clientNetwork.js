@@ -1,4 +1,5 @@
 import { SERVER_HTTP, SERVER_SOCKET } from "./clientConfig.js";
+import{client_AntwortFromServer} from "./clientRequesFromServer.js";
 
 
 export let playerToken = localStorage.getItem("playerToken");
@@ -76,20 +77,8 @@ function startReconnect() {
 
 
 function receiveEvent(data) {
-    switch (data.type) {
-        case "message": {
-            console.log("Server message:", data.text);
-            break;
-        }
-        //case "tockenUpdate": {
-        //    playerToken = data.token;
-        //    localStorage.setItem("playerToken", playerToken);
-            
-        //}
-        
-        default:
-            console.log("Server event:", data);
-    }
+    client_AntwortFromServer(data);
+    
 }
 
 
