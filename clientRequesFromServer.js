@@ -34,26 +34,38 @@ export async function getRooms(data) {
     /* Server:
                 sendToSocket(socket, { command: "rooms", rooms: playerRooms });
     */
+   document.getElementById("loginModal").style.top = "50%";
    document.getElementById("loginModal").style.height = "0%";
    document.getElementById("GameRooms-container").style.height = "50%";
 
 
+    let selectedRoomID = null;
     const tableBody = document.querySelector("#GameRooms-table tbody");
 
-    for (const room of data.rooms) {
+    for (let i = 0; i < rooms.length; i++) {
+        const room = rooms[i];
         const row = document.createElement("tr");
-
         row.innerHTML = `
             <td>${room.id}</td>
             <td>${room.name}</td>
             <td>${room.map}</td>
         `;
+
         row.addEventListener("click", () => {
-            console.log("Selected room:", room);
+            document.querySelectorAll("#GameRooms-table tbody tr")
+                .forEach(r => r.classList.remove("selected"));
+
+            row.classList.add("selected");
+            selectedRoomID = room.id;
         });
+
+        // Первая строка выбрана автоматически
+        if (i === 0) {
+            row.classList.add("selected");
+            selectedRoomID = room.id;
+        }
+
         tableBody.appendChild(row);
     }
-
-
         console.log("Server rooms:", data.rooms);
 }

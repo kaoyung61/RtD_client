@@ -35,6 +35,7 @@ export function createStartScreen(){
         <table id="GameRooms-table">
             <thead>
                 <tr>
+                    <th>RoomID</th>
                     <th>Name</th>
                     <th>Map</th>
                     <!--<th>Players</th>
@@ -46,7 +47,7 @@ export function createStartScreen(){
             </tbody>
         </table>
 		</div>
-		<button id="GameRooms-connectButton" class="button_0" onclick="connectButton_click()>Connect</button>
+		<button id="GameRooms-connectButton" class="button_0" onclick="connectButton_click()">Connect</button>
 	</div>
     `;
     document.getElementById("GameRooms-container").style.height = "0%";
@@ -86,4 +87,21 @@ function openRegisterBtn_click(){
     localStorage.setItem("player", JSON.stringify(dataToSend));
     sendtoServer("newClientRegistration", dataToSend);
 
+}
+
+function connectButton_click() {
+    const selectedRow = document.querySelector("#GameRooms-table tbody tr.selected");
+
+    if (!selectedRow) {
+        console.log("No room selected");
+        return;
+    }
+
+    const roomID = selectedRow.cells[0].textContent;
+
+    console.log("Selected room:", roomID);
+
+    let dataToSend = {roomID: roomID};
+
+    sendRequest("connectRoom", dataToSend);
 }
