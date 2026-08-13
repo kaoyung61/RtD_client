@@ -32,9 +32,25 @@ export async function getToken(data) {
 
 export async function getRooms(data) {
     /* Server:
-
+                sendToSocket(socket, { command: "rooms", rooms: playerRooms });
     */
+   document.getElementById("loginModal").style.height = "0%";
+   document.getElementById("GameRooms-container").style.height = "50%";
 
 
-    console.log("Server rooms:", data.rooms);
+    const tableBody = document.querySelector("#GameRooms-table tbody");
+
+    for (const room of data.rooms) {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${room.id}</td>
+            <td>${room.name}</td>
+            <td>${room.map}</td>
+        `;
+        tableBody.appendChild(row);
+    }
+
+
+        console.log("Server rooms:", data.rooms);
 }
