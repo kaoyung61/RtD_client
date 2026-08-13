@@ -105,5 +105,5 @@ function connectButton_click() {
 
     let dataToSend = {roomID: roomID};
 
-    sendRequest("connectRoom", dataToSend);
+    sendtoServer("connectRoom", dataToSend);
 }
