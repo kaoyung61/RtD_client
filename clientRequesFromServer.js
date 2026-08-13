@@ -48,6 +48,9 @@ export async function getRooms(data) {
             <td>${room.name}</td>
             <td>${room.map}</td>
         `;
+        row.addEventListener("click", () => {
+            console.log("Selected room:", room);
+        });
         tableBody.appendChild(row);
     }
 
