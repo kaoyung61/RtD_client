@@ -47,11 +47,13 @@ export function createStartScreen(){
             </tbody>
         </table>
 		</div>
-		<button id="GameRooms-connectButton" class="button_0" onclick="connectButton_click()">Connect</button>
+		<button id="GameRooms-connectButton" class="button_0">Connect</button>
 	</div>
     `;
     document.getElementById("GameRooms-container").style.height = "0%";
-
+    document
+        .getElementById("GameRooms-connectButton")
+        .addEventListener("click", connectButton_click);
 }
 
 export function showLoginScreen(){

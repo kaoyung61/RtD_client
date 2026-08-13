@@ -34,7 +34,7 @@ export async function getRooms(data) {
     /* Server:
                 sendToSocket(socket, { command: "rooms", rooms: playerRooms });
     */
-   document.getElementById("loginModal").style.top = "50%";
+  
    document.getElementById("loginModal").style.height = "0%";
    document.getElementById("GameRooms-container").style.height = "50%";
 
