@@ -40,6 +40,7 @@ export async function getRooms(data) {
 
 
     let selectedRoomID = null;
+    let rooms = data.rooms;
     const tableBody = document.querySelector("#GameRooms-table tbody");
 
     for (let i = 0; i < rooms.length; i++) {
