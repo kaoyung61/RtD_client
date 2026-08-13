@@ -82,6 +82,11 @@ function receiveEvent(data) {
 }
 
 
+export function updateToken(token) {
+    playerToken = token;
+    localStorage.setItem("playerToken", token);
+}
+
 export function sendtoServer(command, data = {}) {
     if (!socket || socket.readyState !== WebSocket.OPEN) {
         console.warn("Socket not connected");

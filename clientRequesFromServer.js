@@ -1,4 +1,5 @@
 //import { CR_authoriseMe, CR_loginClient, CR_newClientRegistration } from "./gameLogic/serverLoginRequest.js";
+import { updateToken } from "./clientNetwork.js";
 
 export async function client_AntwortFromServer(data) {
     switch (data.command) {
@@ -25,8 +26,7 @@ export async function getToken(data) {
     /* Server:
                 sendToSocket(socket, { command: "token", token: player.token });
     */
-
-    localStorage.setItem("token", data.token);
+    updateToken(data.token);
     console.log("Token UPD:", data.token);
 }
 
