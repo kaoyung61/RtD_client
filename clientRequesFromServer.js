@@ -86,6 +86,6 @@ async function registerOnServer() {
         console.log("No player token found in localStorage.");
         return;
     }
-    sendtoServer({ command: "registerPlayer", token: playerToken });
+    sendtoServer("registerPlayer", {token: playerToken });
     console.log("Registering player with token:", playerToken);
 }
