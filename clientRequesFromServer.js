@@ -3,10 +3,11 @@ import { updateToken } from "./clientNetwork.js";
 
 export async function client_AntwortFromServer(data) {
     switch (data.command) {
-        case "message":     {return     getMessage(data);}
-        case "token":       {return     getToken(data);}
-        case "rooms":       {return     getRooms(data);}
+        case "message":     {return     gotMessage(data);}
+        case "token":       {return     gotToken(data);}
+        case "rooms":       {return     gotRooms(data);}
         case "roomState":   {return     gotRoomState(data.data);}
+        case "requestToken":  {return   registerOnServer();}
         //case "tockenUpdate": {
         //    playerToken = data.token;
         //    localStorage.setItem("playerToken", playerToken);
@@ -19,11 +20,11 @@ export async function client_AntwortFromServer(data) {
 
 }
 
-export async function getMessage(data) {
+export async function gotMessage(data) {
     console.log("Server message:", data.text);
 }
 
-export async function getToken(data) {
+export async function gotToken(data) {
     /* Server:
                 sendToSocket(socket, { command: "token", token: player.token });
     */
@@ -31,7 +32,7 @@ export async function getToken(data) {
     console.log("Token UPD:", data.token);
 }
 
-export async function getRooms(data) {
+export async function gotRooms(data) {
     /* Server:
                 sendToSocket(socket, { command: "rooms", rooms: playerRooms });
     */
@@ -77,4 +78,14 @@ async function gotRoomState(roomState) {
     // Здесь вы можете обработать состояние комнаты, например, обновить интерфейс игры
     // Например:
     // updateGameInterface(roomState);
+}
+
+async function registerOnServer() {
+    let playerToken = localStorage.getItem("playerToken");
+    if (!playerToken) {
+        console.log("No player token found in localStorage.");
+        return;
+    }
+    sendToServer({ command: "registerPlayer", token: playerToken });
+    console.log("Registering player with token:", playerToken);
 }
