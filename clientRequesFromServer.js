@@ -1,5 +1,5 @@
 //import { CR_authoriseMe, CR_loginClient, CR_newClientRegistration } from "./gameLogic/serverLoginRequest.js";
-import { updateToken } from "./clientNetwork.js";
+import { updateToken, sendtoServer } from "./clientNetwork.js";
 
 export async function client_AntwortFromServer(data) {
     switch (data.command) {
@@ -86,6 +86,6 @@ async function registerOnServer() {
         console.log("No player token found in localStorage.");
         return;
     }
-    sendToServer({ command: "registerPlayer", token: playerToken });
+    sendtoServer({ command: "registerPlayer", token: playerToken });
     console.log("Registering player with token:", playerToken);
 }
