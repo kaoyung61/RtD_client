@@ -6,6 +6,7 @@ export async function client_AntwortFromServer(data) {
         case "message":     {return     getMessage(data);}
         case "token":       {return     getToken(data);}
         case "rooms":       {return     getRooms(data);}
+        case "roomState":   {return     gotRoomState(data.data);}
         //case "tockenUpdate": {
         //    playerToken = data.token;
         //    localStorage.setItem("playerToken", playerToken);
@@ -69,4 +70,11 @@ export async function getRooms(data) {
         tableBody.appendChild(row);
     }
         console.log("Server rooms:", data.rooms);
+}
+
+async function gotRoomState(roomState) {
+    console.log("Server roomState:", roomState);
+    // Здесь вы можете обработать состояние комнаты, например, обновить интерфейс игры
+    // Например:
+    // updateGameInterface(roomState);
 }
