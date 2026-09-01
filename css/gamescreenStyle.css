@@ -1,0 +1,155 @@
+:root {
+	--jbg-gray: rgba(32,32,32,1);
+	--jbg-gold: rgba(202,194,136,1);
+}
+
+#left-container{
+	position: fixed;
+    width: 20px;
+	top: 10%;
+	bottom: 10%;
+	left: 0px;
+	background-image: url('img/background.png');
+}
+
+#zoomRange {
+  position: absolute;
+  top: 1%;
+	transform: translate(-50%, 0%);
+  left: 8px;
+  writing-mode: vertical-lr; /* Вертикальная ориентация */
+  direction: rtl; /* Направление с низу вверх */
+  width: 20px; /* Ширина ползунка */
+  height: 18%; /* Высота ползунка */
+	z-index: 50;
+}
+
+#policeLevelSvg {
+  position: absolute;
+  top: 20%;
+  left: 0px;
+  writing-mode: vertical-lr; /* Вертикальная ориентация */
+  direction: rtl; /* Направление с низу вверх */
+  width: 20px; /* Ширина ползунка */
+  height: 79%; /* Высота ползунка */
+	z-index: 50;
+}
+
+.policeLevelFramePolygon{
+	z-index:0;
+	fill:rgba(0, 0, 0, 0);
+	stroke:var(--jbg-gold);
+	stroke-width: 1px;
+}
+.policeLevelLine{
+	z-index:0;
+	stroke:var(--jbg-gold);
+	stroke-width: 6px;
+}
+
+/* Стили для контейнера карты */
+#map-container {
+  position: fixed;
+  width: calc(100% - 20px);
+	top: 10%;
+	bottom: 10%;
+	left: 20px;
+  overflow: scroll;
+}
+
+/* Стили для карты */
+#map-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto; /* Высота будет автоматически рассчитана в зависимости от ширины */
+  object-fit: contain; /* Убедитесь, что изображение полностью видно без обрезки */
+	z-index: 1;
+}
+
+#polygonSvg {
+	position: absolute; /* Позиционируем SVG абсолютно */
+	top: 0; /* Начало с верхней части контейнера */
+	left: 0; /* Начало с левой части контейнера */
+	width: 100%; /* Занимаем всю ширину */
+	height: 100%; /* Занимаем всю высоту */
+	z-index: 2; /* Устанавливаем z-index выше, чтобы быть на переднем плане */
+}
+
+#panel-container {
+  position: fixed;
+  width: 100%; /* Полная ширина экрана */
+	bottom: 10%;
+	top: 80%;
+  overflow: hidden; /* Скрыть любое выходящее за пределы содержимое */
+}
+
+#BossPanel {
+    white-space: pre-line; /* Сохраняет переносы строк */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0; /* Полная ширина экрана */
+    height: 10%; /* Высота 10% экрана */
+    background-image: url('img/background.png');
+    color:  var(--jbg-gold);
+    /*padding: 10px;*/
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 11;
+    /*border: 6px solid #8B4513; /* Толщина границы: 4px, цвет границы: оранжевый (#ff6600) */
+    border-radius: 0px; /* Закругление углов */
+}
+
+.boss-column {
+    flex: 1; /* Одинаковая ширина для обоих столбцов */
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+}
+
+.boss-column + .boss-column {
+    border-left: 2px solid rgba(255, 255, 255, 0.3); /* Вертикальная линия-разделитель между колонками */
+    padding-left: 10px; /* Отступ от линии */
+}
+
+.boss-column div {
+    margin: 0px 0; /* Небольшой отступ между строками информации */
+}
+
+/* Стили для иконок на карте */
+.map-icon {
+  position: absolute;
+ 	z-index: 3;
+  cursor: pointer;
+  transform: translate(-50%, -60%); /* Центрирование иконок по своим координатам */
+	
+}
+
+.map-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+/* количество бандитов */
+.bandit-label {
+  position: absolute;
+	z-index: 4;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 3px;
+  border-radius: 10px;
+  font-size: 20px;
+	display: flex;
+  justify-content: center; /* Горизонтальное выравнивание */
+  align-items: center; /* Вертикальное выравнивание */
+	transform: translate(-50%, -100%);
+	cursor: pointer;
+}
+
+p {
+  text-align: center; /* Горизонтальное выравнивание текста внутри параграфа */
+}

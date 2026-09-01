@@ -1,7 +1,4 @@
-import { playerToken, playerLogin, playerPassword } from "./clientNetwork.js";
-
-
-console.log("version 01.09_4");
+console.log("version 01.09_5");
 
 
 
@@ -14,14 +11,20 @@ import {
     showLoginScreen
 } from "./ui/clientStartScreen.js";
 
+import {
+    createGameScreen,
+} from "./ui/clientGameScreen.js";
+
 
 connectSocket();
 
 createStartScreen();
-
+createGameScreen();
 
 setTimeout(() => {
     showLoginScreen();
 }, 1500);
+
+
 
 

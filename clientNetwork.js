@@ -1,5 +1,5 @@
 import { SERVER_HTTP, SERVER_SOCKET } from "./clientConfig.js";
-import{client_AntwortFromServer} from "./clientRequesFromServer.js";
+import{client_AntwortFromServer} from "./clientRequestFromServer.js";
 
 
 export let playerToken = localStorage.getItem("playerToken");

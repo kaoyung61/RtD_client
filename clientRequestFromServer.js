@@ -5,23 +5,20 @@ export async function client_AntwortFromServer(data) {
     switch (data.command) {
         case "message":     {return     gotMessage(data);}
         case "token":       {return     gotToken(data);}
+        case "requestToken": {return    registerOnServer();}
         case "rooms":       {return     gotRooms(data);}
-        case "roomState":   {return     gotRoomState(data.data);}
-        case "requestToken":  {return   registerOnServer();}
-        //case "tockenUpdate": {
-        //    playerToken = data.token;
-        //    localStorage.setItem("playerToken", playerToken);
-            
-        //}
+        case "roomState":   {return     gotRoomState(data);}
+        case "mapData":     {return     updateGameInterface(data);}
+        
         
         default:
-            console.log("Server unnown event:", data);
+            console.log("Server unknown event:", data);
     }
 
 }
 
 export async function gotMessage(data) {
-    console.log("Server message:", data.text);
+    console.log("Server message:", data);
 }
 
 export async function gotToken(data) {
@@ -78,6 +75,7 @@ async function gotRoomState(roomState) {
     // Здесь вы можете обработать состояние комнаты, например, обновить интерфейс игры
     // Например:
     // updateGameInterface(roomState);
+    updateGameInterface(roomState);
 }
 
 async function registerOnServer() {
@@ -88,4 +86,9 @@ async function registerOnServer() {
     }
     sendtoServer("registerPlayer", {token: playerToken });
     console.log("Registering player with token:", playerToken);
+}
+
+async function updateGameInterface(roomState) {
+    // Здесь вы можете обновить интерфейс игры на основе состояния комнаты
+
 }
