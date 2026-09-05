@@ -1,10 +1,6 @@
-console.log("version 05.09_1");
+console.log("version 05.09_2");
 
-
-
-import {
-    connectSocket
-} from "./clientNetwork.js";
+import { connectToServer } from "./clientNetwork.js";
 
 import {
     createStartScreen,
@@ -15,15 +11,16 @@ import {
     createGameScreen,
 } from "./ui/clientGameScreen.js";
 
+//setTimeout(() => {showLoginScreen();}, 1500);
+//setTimeout(() => {showStartScreen();}, 1500);
 
-connectSocket();
+connectToServer();
 
-createStartScreen();
-createGameScreen();
 
-setTimeout(() => {
-    showLoginScreen();
-}, 1500);
+//createStartScreen();
+//createGameScreen();
+
+
 
 
 
