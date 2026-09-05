@@ -47,7 +47,7 @@ export function sendtoServer(command, data = {}) {
     return true;
 }
 
-function authoriseOnServer() {
+export function authoriseOnServer() {
     if (!playerToken) {
         console.log("No token found, need to login or register");
         createLoginScreen();
