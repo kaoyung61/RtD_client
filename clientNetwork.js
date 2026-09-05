@@ -1,6 +1,6 @@
 import { SERVER_HTTP, SERVER_SOCKET } from "./clientConfig.js";
 import {client_AntwortFromServer} from "./clientRequestFromServer.js";
-import { createLoginScreen } from "./ui/clientStartScreen.js";
+import { createLoginScreen } from "./ui/clientLoginScreen.js";
 
 
 export let playerToken = localStorage.getItem("playerToken");
