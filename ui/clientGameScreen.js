@@ -1,12 +1,12 @@
+import {askRoomState, askMapData} from "../clientRequestFromServer.js";
 
-
-export function createGameScreen(){
+export async function createGameScreen(){
     const gameScreen = document.getElementById("gameScreen");
     if(!gameScreen){
         console.error("gameScreen not found");
         return;
     }
-    gameScreen.style.display = "none";
+    //gameScreen.style.display = "none";
 
     gameScreen.innerHTML = `
         <div id="left-container">
@@ -37,26 +37,47 @@ export function createGameScreen(){
             <div id="GameStatus-text" >Ход игрока</div>
             <button id="start-btn">Начать ход</button>
             <button id="hire-btn">Нанять бойцов</button>
-            <button id="bau-btn">Строить бизнес</button>
             <button id="next-btn">Дальше</button>
             
         </div>
     `;
 
-    
+    let activeRoom = JSON.parse(localStorage.getItem("activeRoom"));
+    let mapData = JSON.parse(localStorage.getItem("mapData_"+activeRoom.map));
+
+    if (mapData) {
+        // Connect to the active room
+        createMap(mapData);
+    } else {
+        // Ask for room selection
+        askMapData(activeRoom.map);
+    }
+};
+
+
+
+export async function updateRoomState(RoomState) {
+    // Здесь вы можете обновить интерфейс игры на основе состояния комнаты
+    //console.log("Updating game interface with room state:", RoomState);
+
 }
+
+
+
+
 
 export function showGameScreen(){
     console.log("showGameScreen called");
     document.getElementById("gameScreen").style.display = "block";
-    document.getElementById("loginScreen").style.display = "none";
-    document.getElementById("roomScreen").style.display = "none";
-    document.getElementById("logo_img").style.height = "0%";
+    document.getElementById("startScreen").style.display = "none";
+   // document.getElementById("roomScreen").style.display = "none";
+    //document.getElementById("logo_img").style.height = "0%";
     
 }
 
 
 function scalePolygonString(points, scaleFactor) {
+    console.log(points, typeof points);
     // Разделяем строку на массив точек
     let scaledPoints = points.split(" ").map(point => {
         // Разделяем точку на координаты X и Y
@@ -67,25 +88,39 @@ function scalePolygonString(points, scaleFactor) {
 
     // Собираем обратно в строку и возвращаем
     return scaledPoints.join(" ");
-} 
+}
+
+function scalePolygonPoints(points, scaleFactor) {
+    return points.map(([x, y]) => [
+        x * scaleFactor,
+        y * scaleFactor
+    ]);
+}
 
 function colorPolygon(terrID,r,g,b,a){
 	let terrPolygon=document.getElementById(terrID+'_plg');
-	colorPen="rgba("+r+", "+g+", "+b+", "+a/3+")";
-	colorFill="rgba("+r+", "+g+", "+b+", "+a+")";
+	let colorPen="rgba("+r+", "+g+", "+b+", "+a/3+")";
+	let colorFill="rgba("+r+", "+g+", "+b+", "+a+")";
 	terrPolygon.setAttribute("fill", colorFill); // Прозрачная заливка
 	terrPolygon.setAttribute("stroke", colorPen); // Черный контур
 	terrPolygon.setAttribute("filter", "url(#blur)"); // Применение фильтра размытия
 };
 
-function createMap(mapData) {
-    
-    document.getElementById("map-img").src = "img/MapImg/" + mapData.mapImage + "_Map.png";
-    mapSize = mapData.mapSize;
-    scaleH = document.getElementById("logo_img").style.height/mapSize[1];
-    scaleW = document.getElementById("logo_img").style.width/mapSize[0];
-    scale = Math.min(scaleH, scaleW);
 
+
+
+
+export function createMap(mapData) {
+    
+    document.getElementById("map-img").src = "img/MapImg/" + mapData.mapImage;
+    let mapSize = mapData.mapSize;
+    console.log(document.getElementById("map-container").clientHeight);
+    console.log(document.getElementById("map-img").clientHeight);
+    //console.log(document.getElementById("map-img").style);
+    let scaleH = document.getElementById("map-container").clientHeight/mapSize[1];
+    let scaleW = document.getElementById("map-container").clientWidth/mapSize[0];
+    let scale = Math.max(scaleH, scaleW);
+    console.log("[FUNC] createMap scale=",scale);
 
     /*mapData.territories: array von
     {"id":11,      "region":1,
@@ -112,7 +147,7 @@ function createMap(mapData) {
 
 			// Устанавливаем атрибуты для полигона
 			polygon.setAttribute("id", territory.id + '_plg');
-			polygon.setAttribute("points", scalePolygonString(territory.border, scale)); // Координаты точек
+			polygon.setAttribute("points", scalePolygonPoints(territory.border, scale)); // Координаты точек
 			polygon.setAttribute("fill", "rgba(0, 0, 0, 0)"); // Прозрачная заливка
 			polygon.setAttribute("stroke", "rgba(0, 0, 0, 0)"); // Прозрачный контур
 			polygon.setAttribute("stroke-width", "10"); // Толщина контура
@@ -125,9 +160,11 @@ function createMap(mapData) {
 
 			// Добавляем полигон в SVG после завершения обработки
 			svg.appendChild(polygon);
-			colorPolygon(territory.id, 0, 0, 0,0);
+			colorPolygon(territory.id, 100, 0, 0, 1);
     });
-
+    let activeRoom = JSON.parse(localStorage.getItem("activeRoom"));
+    askRoomState(activeRoom.id);
+    showGameScreen()
 };
 
 

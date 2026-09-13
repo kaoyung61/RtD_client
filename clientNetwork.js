@@ -44,6 +44,7 @@ export function updateToken(token) {
 export function sendtoServer(command, data = {}) {
     if (!socket || socket.readyState !== WebSocket.OPEN) { console.warn("Socket not connected"); return false; }
     socket.send(JSON.stringify({ command, data }));
+    console.log("[OUT ]: command: ",command," data: ", data);
     return true;
 }
 

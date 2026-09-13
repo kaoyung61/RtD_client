@@ -1,25 +1,27 @@
 //import { CR_authoriseMe, CR_loginClient, CR_newClientRegistration } from "./gameLogic/serverLoginRequest.js";
 import { updateToken, authoriseOnServer, sendtoServer } from "./clientNetwork.js";
+import { createLoginScreen, createLobbyScreen } from "./ui/clientLoginScreen.js";
+import {createGameScreen, updateRoomState, createMap} from "./ui/clientGameScreen.js";
 
 
+export async function client_AntwortFromServer(input) {
+    console.log("[ IN  ]:", input);
+    switch (input.command) {
+        case "message":     {return     gotMessage(input);}
+        case "token":       {return     gotToken(input);}
+        case "errAuth":   {return     gotErrorAuth(input);}
+        case "auth":        {return     gotAuthorisation(input);}
+        case "errLogin":  {return     gotErrorLogin(input);}
 
-export async function client_AntwortFromServer(data) {
-    switch (data.command) {
-        case "message":     {return     gotMessage(data);}
-        case "token":       {return     gotToken(data);}
-        case "errAuth":   {return     gotErrorAuth(data);}
-        case "auth":        {return     gotAuthorisation(data);}
-        case "errLogin":  {return     gotErrorLogin(data);}
-
-        case "errRoomConnection":  {return     gotErrorRoomConnection(data);}
-        case "RoomConnection":  {return     gotRoomConnection(data);}
-        case "lobby":       {return     gotLobby(data);}
-        case "roomState":   {return     gotRoomState(data);}
-        case "mapData":     {return     updateGameInterface(data);}
+        case "errRoomConnection":  {return     gotErrorRoomConnection(input);}
+        case "RoomConnection":  {return     gotRoomConnection(input);}
+        case "lobby":       {return     gotLobby(input);}
+        case "roomState":   {return     gotRoomState(input);}
+        case "mapData":     {return     gotMapData(input);}
        
         
         default:
-            console.log("Server unknown event:", data);
+            console.log("Server unknown event:", input);
     }
 
 }
@@ -62,10 +64,10 @@ export async function gotAuthorisation(data) {
     1.1 if yes, connect to room
     1.2 if no, ask for room selection
     */
-   let activeRoomID = localStorage.getItem("activeRoomID");
-   if (activeRoomID) {
+   let activeRoom = JSON.parse(localStorage.getItem("activeRoom"));
+   if (activeRoom) {
         // Connect to the active room
-        askConnectToRoom(activeRoomID);
+        askConnectToRoom(activeRoom.id);
    } else {
         // Ask for room selection
         askLobby();
@@ -81,15 +83,24 @@ export async function gotRoomConnection(data) {
     /* Server:
         sendToPlayer(playerID, { command: "RoomConnection", roomID: roomID });
     */ 
-    localStorage.setItem("activeRoomID", data.roomID);
-    askRoomState(data.roomID);
+    //console.log("gotRoomConnection:", data);
+    localStorage.setItem("activeRoom", JSON.stringify(data.room));
+    
+
+
+    //create room interface
+    await createGameScreen();
+
+    //ask room state
+    //askRoomState(data.room.id); // ask room state from server →😊 maybe in createGameInterface() function
+
 }
 
 export async function gotErrorRoomConnection(data) {
     /* Server:
                 sendToSocket(socket, { command: "errRoomConnection", text: "Player is not allowed to connect to this room" });
     */
-    console.log("gotErrorRoomConnection:", data.text);
+    //console.log("gotErrorRoomConnection:", data.text);
     askLobby();
 }
 
@@ -109,13 +120,12 @@ export async function gotLobby(data) {
                 sendToSocket(socket, { command: "rooms", rooms: playerRooms });
     */
   
-   document.getElementById("loginModal").style.height = "0%";
-   document.getElementById("GameRooms-container").style.height = "50%";
+   createLobbyScreen();
 
 
     let selectedRoomID = null;
     let rooms = data.rooms;
-    const tableBody = document.querySelector("#GameRooms-table tbody");
+    const tableBody = document.querySelector("#lobby_Table tbody");
 
     for (let i = 0; i < rooms.length; i++) {
         const room = rooms[i];
@@ -127,7 +137,7 @@ export async function gotLobby(data) {
         `;
 
         row.addEventListener("click", () => {
-            document.querySelectorAll("#GameRooms-table tbody tr")
+            document.querySelectorAll("#lobby_Table tbody tr")
                 .forEach(r => r.classList.remove("selected"));
 
             row.classList.add("selected");
@@ -142,28 +152,41 @@ export async function gotLobby(data) {
 
         tableBody.appendChild(row);
     }
-        console.log("Server rooms:", data.rooms);
+        //console.log("Server rooms:", data.rooms);
+}
+
+
+
+
+export async function askRoomState(RoomID) {
+    sendtoServer("requestRoomState", { roomID: RoomID });
 }
 
 
 
 
 
-
-
-
-
-
-async function gotRoomState(roomState) {
-    console.log("Server roomState:", roomState);
+async function gotRoomState(RoomState) {
+    //console.log("Server roomState:", RoomID);
     // Здесь вы можете обработать состояние комнаты, например, обновить интерфейс игры
     // Например:
     // updateGameInterface(roomState);
-    updateGameInterface(roomState);
+    updateRoomState(RoomState);
 }
 
 
-async function updateGameInterface(roomState) {
-    // Здесь вы можете обновить интерфейс игры на основе состояния комнаты
 
+export async function askMapData(MapName) {
+    sendtoServer("requestMapData", { mapName: MapName });
+}
+
+
+async function gotMapData(input) {
+    //console.log("Server mapData:", data);
+    // Здесь вы можете обработать данные карты, например, обновить интерфейс игры
+    // Например:
+    // updateGameInterface(mapData);
+    console.log("input: ",input);
+    localStorage.setItem("MAP_" + input.data.name, JSON.stringify(input.data));
+    createMap(input.data);
 }

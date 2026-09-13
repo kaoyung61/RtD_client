@@ -14,7 +14,7 @@ export function createLoginScreen(){
         <input type="text" id="login_input" class="login_input" placeholder="Login" required />
         <input type="password" id="password_input" class="login_input" placeholder="Password" required />
         <button type="button" id="login_button" class="button_0">Sign In</button>
-        <!--<button type="button" id="openRegister_button" class="button_0">I'm new here. Register me</button>
+        <button type="button" id="openRegister_button" class="button_0">I'm new here. Register me</button>
     `;
     document.getElementById("loginScreen").style.height = "0%";
     document.getElementById("login_button").addEventListener("click", loginBtn_click);
@@ -54,8 +54,8 @@ export function createLobbyScreen(){
     }
 
     lobbyScreen.innerHTML = `
-		<div id="GameRooms-table-container">
-            <table id="GameRooms-table">
+		<div id="lobby_Table_Container">
+            <table id="lobby_Table">
                 <thead>
                     <tr>
                         <th>RoomID</th>
@@ -70,14 +70,17 @@ export function createLobbyScreen(){
                 </tbody>
             </table>
 		</div>
-		<button id="GameRooms-connectButton" class="button_0">Connect</button>
+		<button id="connectRoom_Button">Connect</button>
     `;
-    document.getElementById("GameRooms-container").style.height = "0%";
-    document.getElementById("GameRooms-connectButton").addEventListener("click", connectButton_click);
+    document.getElementById("connectRoom_Button").addEventListener("click", connectButton_click);
+    showLobbyScreen()
+
 }
 
 export function showLobbyScreen(){
     document.getElementById("logo_img").style.height = "40%";
+    //document.getElementById("loginScreen").style.top = "50%";
+    //document.getElementById("loginScreen").style.bottom = "";
     document.getElementById("loginScreen").style.height = "0%";
     document.getElementById("lobbyScreen").style.height = "50%";
 }
@@ -95,7 +98,7 @@ function openRegisterBtn_click(){
 */
 
 function connectButton_click() {
-    const selectedRow = document.querySelector("#GameRooms-table tbody tr.selected");
+    const selectedRow = document.querySelector("#lobby_Table tbody tr.selected");
 
     if (!selectedRow) {
         console.log("No room selected");
