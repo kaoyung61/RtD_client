@@ -13,7 +13,8 @@ export async function createGameScreen(){
             <input type="range" min="1" max="2" step="0.1" value="1" class="vertical-slider" id="zoomRange"> <!-- зум карты -->
             <svg width="100%" height="100%" id="policeLevelSvg"></svg>
             
-        </div>	
+        </div>
+        <div id="right-container"></div>
             
         <div id="map-container">
             <img alt="Map" id="map-img">
@@ -25,19 +26,23 @@ export async function createGameScreen(){
                 </defs>
             </svg>
         </div>
+        
+        <div id="right-container"></div>
+
+        <div id="BossPanel">
+            <div id="BossPanel_input" > </div>
             
-        <div id="panel-container">
-            <div id="BossPanel" > </div>
         </div>
 
 
 
         <!-- Контейнер для кнопок -->
-        <div id="btn-container">
+        <div id="bottom-container">
             <div id="GameStatus-text" >Ход игрока</div>
-            <button id="start-btn">Начать ход</button>
-            <button id="hire-btn">Нанять бойцов</button>
-            <button id="next-btn">Дальше</button>
+            <div id="buttons-container">
+                <button id="action-btn" class="bottom-btn">Action</button>
+                <button id="next-btn" class="bottom-btn">Next</button>
+            </div>
             
         </div>
     `;
@@ -120,7 +125,19 @@ export function createMap(mapData) {
     let scaleH = document.getElementById("map-container").clientHeight/mapSize[1];
     let scaleW = document.getElementById("map-container").clientWidth/mapSize[0];
     let scale = Math.max(scaleH, scaleW);
-    console.log("[FUNC] createMap scale=",scale);
+    //console.log("[FUNC] createMap scale=",scale);
+
+    const mapWidth = mapSize[0] * scale;
+    const mapHeight = mapSize[1] * scale;
+
+    const mapImg = document.getElementById("map-img");
+    const polygonSVG = document.getElementById("polygonSvg");
+
+    mapImg.style.width = `${mapWidth}px`;
+    mapImg.style.height = `${mapHeight}px`;
+
+    polygonSVG.style.width = `${mapWidth}px`;
+    polygonSVG.style.height = `${mapHeight}px`;
 
     /*mapData.territories: array von
     {"id":11,      "region":1,
@@ -171,6 +188,7 @@ export function createMap(mapData) {
 export function territoryOnClick(terrID) {
 	//document.querySelector('.dropdown-content').style.display = 'none'; // Скрываем меню, если клик был вне меню
 	console.log('function territoryOnClick('+terrID+')')
+    colorPolygon(terrID, 0, 0, 100, 1);
 	console.log('          GameStatus.Phase: '+GameStatus.Phase)
 	//нажатие на территорию имеет смысл лишь в случе атаки или перемещения.
 	// причем нажатие может быть двух типов - сначала мы выбираем откуда, а потом цель

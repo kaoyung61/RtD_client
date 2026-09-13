@@ -12,6 +12,15 @@
 	background-image: url('img/background.png');
 }
 
+#right-container{
+	position: fixed;
+    width: 20px;
+	top: 10%;
+	bottom: 10%;
+	right: 0px;
+	background-image: url('img/background.png');
+}
+
 #zoomRange {
   position: absolute;
   top: 1%;
@@ -50,7 +59,7 @@
 /* Стили для контейнера карты */
 #map-container {
   position: fixed;
-  width: calc(100% - 20px);
+  width: calc(100% - 40px);
 	top: 10%;
 	bottom: 10%;
 	left: 20px;
@@ -152,4 +161,43 @@
 
 p {
   text-align: center; /* Горизонтальное выравнивание текста внутри параграфа */
+}
+
+
+
+
+#bottom-container{
+  white-space: pre-line; /* Сохраняет переносы строк */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0; /* Полная ширина экрана */
+  height: 10%; /* Высота 10% экрана */
+  background-image: url('img/background.png');
+  color:  var(--jbg-gold);
+  /*padding: 10px;*/
+  font-size: 14px;
+  display: grid;
+  grid-template-rows: 20px 1fr;
+
+  z-index: 11;
+  border-radius: 0;
+
+}
+
+#GameStatus-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#buttons-container {
+    margin: 0 20px 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.bottom-btn {
+    flex: 1;
 }
