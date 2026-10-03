@@ -132,7 +132,8 @@
 /* Стили для иконок на карте */
 
 .map-object{
-  -webkit-transition: transform 1s ease;
+  -webkit-transition: -webkit-transform 1s ease;
+  transition: transform 1s ease;
 }
 
 .map-icon {
@@ -169,7 +170,8 @@ p {
 }
 
 .gameToken {
-  -webkit-transition: transform 1s ease;
+  -webkit-transition: -webkit-transform 1s ease;
+  transition: transform 1s ease;
 }
 
 
