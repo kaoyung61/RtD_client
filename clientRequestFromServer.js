@@ -1,7 +1,12 @@
 //import { CR_authoriseMe, CR_loginClient, CR_newClientRegistration } from "./gameLogic/serverLoginRequest.js";
-import { updateToken, authoriseOnServer, sendtoServer } from "./clientNetwork.js";
-import { createLoginScreen, createLobbyScreen } from "./ui/clientLoginScreen.js";
-import {createGameScreen, updateRoomState, createMap} from "./ui/clientGameScreen.js";
+import {    updateToken, authoriseOnServer, sendtoServer } from "./clientNetwork.js";
+import {    createLoginScreen, createLobbyScreen } from "./ui/clientLoginScreen.js";
+import {    createGameScreen, createMap,
+            animation_moveBoss, animation_moveGeneral, animation_moveBandits} from "./ui/clientGameScreen.js";
+import {    updateRoomState,
+            gotNextPhase,
+            updateMoney,
+            upd_moveBoss, upd_moveGeneral, upd_moveBandits } from "./clientGameLogic.js";
 
 
 export async function client_AntwortFromServer(input) {
@@ -16,9 +21,11 @@ export async function client_AntwortFromServer(input) {
         case "errRoomConnection":  {return     gotErrorRoomConnection(input);}
         case "RoomConnection":  {return     gotRoomConnection(input);}
         case "lobby":       {return     gotLobby(input);}
-        case "roomState":   {return     gotRoomState(input);}
+        case "roomState":   {return     gotRoomState(input.data);}
         case "mapData":     {return     gotMapData(input);}
        
+
+        case "roomUPD": {return     gotRoomUPD(input.data);}
         
         default:
             console.log("Server unknown event:", input);
@@ -64,6 +71,7 @@ export async function gotAuthorisation(data) {
     1.1 if yes, connect to room
     1.2 if no, ask for room selection
     */
+   localStorage.setItem("activePlayer", JSON.stringify(data.playerID));
    let activeRoom = JSON.parse(localStorage.getItem("activeRoom"));
    if (activeRoom) {
         // Connect to the active room
@@ -108,12 +116,6 @@ export async function gotErrorRoomConnection(data) {
 export async function askLobby() {
     sendtoServer("requestLobby", {text: "requestLobby"});
 }
-
-
-
-
-
-
 
 export async function gotLobby(data) {
     /* Server:
@@ -162,16 +164,13 @@ export async function askRoomState(RoomID) {
     sendtoServer("requestRoomState", { roomID: RoomID });
 }
 
-
-
-
-
 async function gotRoomState(RoomState) {
     //console.log("Server roomState:", RoomID);
     // Здесь вы можете обработать состояние комнаты, например, обновить интерфейс игры
     // Например:
     // updateGameInterface(roomState);
     updateRoomState(RoomState);
+
 }
 
 
@@ -186,7 +185,48 @@ async function gotMapData(input) {
     // Здесь вы можете обработать данные карты, например, обновить интерфейс игры
     // Например:
     // updateGameInterface(mapData);
-    console.log("input: ",input);
-    localStorage.setItem("MAP_" + input.data.name, JSON.stringify(input.data));
+    //console.log("input: ",input);
+    localStorage.setItem("mapData_" + input.data.name, JSON.stringify(input.data));
     createMap(input.data);
+}
+
+
+export async function gotRoomUPD(input) {
+    switch (input.phase) {
+        case "balance":  {return  updateMoney(input.updInfo);}
+        case "move":    {return  moveFromTo(input.updInfo);}
+        case "attack":  {return }
+        case "police":  {return }
+        case "hire":    {return }
+        case "nextPhase":{return nextPhase(input.updInfo);}
+        default: console.log("[ ERR ] Unknown type:", input);
+    }
+
+}
+
+
+export function moveFromTo(gotMoveInfo){
+    if(gotMoveInfo.boss){
+        upd_moveBoss(gotMoveInfo);
+        animation_moveBoss(gotMoveInfo);
+    }
+    if(gotMoveInfo.general){
+        upd_moveGeneral(gotMoveInfo);
+        animation_moveGeneral(gotMoveInfo);
+    }
+    if(gotMoveInfo.bandits>0){
+        upd_moveBandits(gotMoveInfo);
+        animation_moveBandits(gotMoveInfo);
+    }
+
+}
+
+
+
+
+
+export function nextPhase(gotNextPhaseInfo){
+    // update phase
+    gotNextPhase(gotNextPhaseInfo);
+
 }

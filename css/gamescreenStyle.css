@@ -130,6 +130,11 @@
 }
 
 /* Стили для иконок на карте */
+
+.map-object{
+  -webkit-transition: transform 1s ease;
+}
+
 .map-icon {
   position: absolute;
  	z-index: 3;
@@ -163,7 +168,9 @@ p {
   text-align: center; /* Горизонтальное выравнивание текста внутри параграфа */
 }
 
-
+.gameToken {
+  -webkit-transition: transform 1s ease;
+}
 
 
 #bottom-container{
